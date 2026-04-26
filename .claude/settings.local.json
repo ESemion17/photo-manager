@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet --version)",
+      "Bash(npm --version)",
+      "Bash(dotnet new *)",
+      "Bash(dotnet sln *)",
+      "Bash(dotnet add *)",
+      "Bash(dotnet remove *)",
+      "Bash(dotnet build *)",
+      "Bash(npm create *)",
+      "Bash(npm config *)",
+      "Bash(NODE_EXTRA_CA_CERTS=\"C:/ProgramData/Cato/CatoRoot.pem\" npm create vite@5 frontend -- --template react-ts)",
+      "Bash(npm install *)",
+      "Bash(npx tailwindcss *)",
+      "Bash(npm run *)",
+      "Bash(npx tsc *)"
+    ]
+  }
+}
