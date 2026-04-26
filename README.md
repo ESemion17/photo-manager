@@ -1,33 +1,37 @@
-# Photo Manager — ניהול תמונות חכם
+# Photo Manager — Smart Photo Management
 
-אפליקציה מקומית לניהול, השוואה וארגון תמונות עם זיהוי כפולות וזיהוי פנים.
+A local application for managing, comparing and organizing photos with duplicate detection and face tagging.
 
-## תכונות עיקריות
+> 🌐 Supports **English**, **Hebrew** (עברית) and **Russian** (Русский) — switchable in the top-right corner.
 
-- **סריקת תיקיות** — סריקה רקעית של תיקיות עם progress bar בזמן אמת
-- **זיהוי כפולות** — סקאלת דמיון 0–10 (0 = זהה לחלוטין, 10 = אותם אנשים/מקום)
-- **השוואה צד-לצד** — תצוגת תמונות דומות עם בחירה ידנית מה לשמור/למחוק
-- **אשפה חכמה** — תמונות "שנמחקו" נשמרות 30 יום לפני מחיקה סופית
-- **תיוג פנים** — זיהוי אנשים בתמונות ושמירת שמות
-- **גלריה** — תצוגת כל התמונות עם pagination
-- **בחירת תיקייה** — ממשק גלישה בתיקיות (ללא הקלדה ידנית)
+## Features
 
-## טכנולוגיות
+- **Folder scanning** — Background scan of photo folders with real-time progress bar
+- **Duplicate detection** — Similarity scale 0–10 (0 = identical, 10 = same people/location)
+- **Side-by-side comparison** — View similar photos together and choose what to keep or delete
+- **Smart trash** — Deleted photos are kept for 30 days before permanent removal
+- **Face tagging** — Identify people in photos and save their names
+- **Gallery** — View all photos with pagination
+- **Folder picker** — Browse and select folders visually (no manual path typing)
+- **Multi-language** — English (default), Hebrew (RTL), Russian
 
-| חלק | טכנולוגיה |
-|-----|-----------|
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
 | Backend | C# ASP.NET Core 10, Entity Framework Core, SQLite |
-| עיבוד תמונות | SixLabors.ImageSharp, pHash, dHash |
+| Image processing | SixLabors.ImageSharp, pHash, dHash |
 | Metadata | MetadataExtractor (EXIF, GPS) |
 | Real-time | SignalR |
 | Frontend | React 18, TypeScript, Vite, Tailwind CSS |
+| i18n | i18next, react-i18next |
 
-## דרישות מערכת
+## Requirements
 
 - [.NET 10 SDK](https://dotnet.microsoft.com/download)
 - [Node.js 18+](https://nodejs.org)
 
-## התקנה והרצה
+## Installation & Running
 
 ### Windows
 
@@ -42,19 +46,19 @@ chmod +x start.sh
 ./start.sh
 ```
 
-לאחר ההפעלה:
+After starting:
 - **Frontend:** http://localhost:5173
 - **Backend API:** http://localhost:5000
 
-## שימוש ראשוני
+## First-time Usage
 
-1. פתח את האפליקציה בדפדפן (`http://localhost:5173`)
-2. לחץ על 📂 ובחר את תיקיית התמונות שלך
-3. לחץ **"התחל סריקה"** — האפליקציה תאנדקס את כל התמונות
-4. עבור לטאב **"תמונות דומות"**, כוונן את הסליידר ולחץ **"חפש"**
-5. בחר אילו תמונות לשמור ואילו למחוק
+1. Open the app in your browser (`http://localhost:5173`)
+2. Click 📂 and browse to your photos folder
+3. Click **"Start Scan"** — the app will index all photos in the background
+4. Go to the **"Similar Photos"** tab, adjust the slider and click **"Find"**
+5. Choose which photos to keep and which to delete
 
-## מבנה הפרויקט
+## Project Structure
 
 ```
 photo-manager/
@@ -68,18 +72,19 @@ photo-manager/
 ├── frontend/
 │   └── src/
 │       ├── components/      # GalleryView, SimilarityView, FolderPicker, ...
+│       ├── i18n/            # Translations: en, he, ru
 │       └── api.ts           # API client
-├── start.bat                # הרצה על Windows
-└── start.sh                 # הרצה על Mac/Linux
+├── start.bat                # Windows startup script
+└── start.sh                 # Mac / Linux startup script
 ```
 
-## סקאלת הדמיון
+## Similarity Scale
 
-| ציון | משמעות |
-|------|--------|
-| 0 | זהות מוחלטת — פיקסל לפיקסל |
-| 1–2 | כפול עם עיבוד קל (crop, resize) |
-| 3–4 | אותה תמונה, דחיסה שונה |
-| 5–6 | אותה סצנה, זווית שונה |
-| 7–8 | אותו אירוע |
-| 9–10 | אותם אנשים, מיקום דומה |
+| Score | Meaning |
+|-------|---------|
+| 0 | Identical — pixel for pixel |
+| 1–2 | Duplicates with minor edits (crop, resize) |
+| 3–4 | Same photo, different compression |
+| 5–6 | Same scene, different angle |
+| 7–8 | Same event |
+| 9–10 | Same people, similar location |
